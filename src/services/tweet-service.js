@@ -8,8 +8,10 @@ class TweetService {
   async create(data) {
     const content = data.content;
     let tags = content.match(/#[a-zA-Z0-9_]+/g); // this regex extracts hashtags
-    tags = tags.map((tag) => tag.substring(1).toLowerCase());
 
+    tags = tags.map((tag) => tag.substring(1).toLowerCase());
+    let tagSet = new Set(tags);
+    tags = Array.from(tagSet);
     const tweet = await this.tweetRepository.create(data);
 
     let existingHashtags = await this.hashtagRepository.findByName(tags);
