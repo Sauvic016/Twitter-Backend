@@ -12,11 +12,10 @@ export const toggleLike = async (req, res) => {
       message: "Successfully toggled like",
     });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({
       success: false,
       data: {},
-      message: "Something went wrong ",
+      message: "Something went wrong",
       err: error,
     });
   }
