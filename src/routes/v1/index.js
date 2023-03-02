@@ -10,8 +10,9 @@ const router = express.Router();
 router.post("/tweets", authenticate, createTweet);
 router.get("/tweets/:id", getTweet);
 
-router.post("/likes/toggle", toggleLike);
-router.post("/comments", createComment);
+router.post("/likes/toggle", authenticate, toggleLike);
+
+router.post("/comments", authenticate, createComment);
 router.get("/comments/:id", getComment);
 
 router.post("/signup", signup);
