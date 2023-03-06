@@ -7,24 +7,23 @@ const tweetService = new TweetService();
 
 export const createTweet = async (req, res) => {
   try {
-    singleUploader(req, res, function (err, data) {
+    singleUploader(req, res, async function (err, data) {
       if (err) {
         return res.status(500).json({
           error: err,
         });
       }
       console.log("Image url is ", req.file);
-      return res.status(200).json({
-        message: "Ok",
+      const payload = { ...req.body };
+      payload.image = req.file.location;
+      const response = await tweetService.create(payload);
+      return res.status(201).json({
+        success: true,
+        data: response,
+        message: "Successfully created a new Tweet",
+        err: {},
       });
     });
-    // const response = await tweetService.create(req.body);
-    // return res.status(201).json({
-    //   success: true,
-    //   data: response,
-    //   message: "Successfully created a new Tweet",
-    //   err: {},
-    // });
   } catch (error) {
     return res.status(500).json({
       success: false,
