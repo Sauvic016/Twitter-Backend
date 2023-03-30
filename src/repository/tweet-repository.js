@@ -20,7 +20,7 @@ class TweetRepository extends CrudRepository {
       const tweet = await Tweet.find().skip(offset).limit(limit);
       return tweet;
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   }
   async find(id) {
@@ -28,7 +28,7 @@ class TweetRepository extends CrudRepository {
       const tweet = await Tweet.findById(id).populate({ path: "likes" });
       return tweet;
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   }
 }
