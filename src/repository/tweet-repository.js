@@ -11,7 +11,7 @@ class TweetRepository extends CrudRepository {
       const tweet = await Tweet.findById(id).populate({ path: "comments" }).lean();
       return tweet;
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   }
 
